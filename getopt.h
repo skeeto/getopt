@@ -40,7 +40,7 @@ getopt(int argc, char * const argv[], const char *optstring)
     } else if (!arg || arg[0] != '-' || !isalnum(arg[1])) {
         return -1;
     } else {
-        char *opt = strchr(optstring, arg[optpos]);
+        const char *opt = strchr(optstring, arg[optpos]);
         optopt = arg[optpos];
         if (!opt) {
             if (opterr && *optstring != ':')
