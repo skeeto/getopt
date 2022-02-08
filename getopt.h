@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <string.h>
 
-static int optind = 1;
+static int optind;
 static int opterr = 1;
 static int optopt;
 static char *optarg;
@@ -28,11 +28,11 @@ getopt(int argc, char * const argv[], const char *optstring)
 
     /* Reset? */
     if (optind == 0) {
-        optind = 1;
+        optind = !!argc;
         optpos = 1;
     }
 
-    arg = optind < argc ? argv[optind] : 0;
+    arg = argv[optind];
     if (arg && strcmp(arg, "--") == 0) {
         optind++;
         return -1;
