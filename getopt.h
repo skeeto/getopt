@@ -65,10 +65,10 @@ getopt(int argc, char * const argv[], const char *optstring)
                     fprintf(stderr, 
                             "%s: option requires an argument: %c\n", 
                             argv[0], optopt);
-            if (!arg[++optpos]) {
-                optind++;
-                optpos = 1;
-            }
+                if (!arg[++optpos]) {
+                    optind++;
+                    optpos = 1;
+                }
                 return *optstring == ':' ? ':' : '?';
             }
         } else {
