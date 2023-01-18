@@ -56,8 +56,8 @@ test1(void)
     TEST("a", getopt(argc, argv, "abc:") == 'a');
     TEST("b", getopt(argc, argv, "abc:") == 'b');
     TEST("c", getopt(argc, argv, "abc:") == 'c');
-    TEST("a", getopt(argc, argv, "abc:") == -1);
     TEST("c optarg", optarg == argv[1] + 4);
+    TEST("a", getopt(argc, argv, "abc:") == -1);
     TEST("optind", !argv[optind]);
     TEST("stop 1", getopt(argc, argv, "abc:") == -1);
     TEST("c optarg", optind == 2);
