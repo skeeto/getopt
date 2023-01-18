@@ -114,7 +114,27 @@ test4(void)
     TEST("unknown option", getopt(argc, argv, ":abc") == '?');
     TEST("optopt", optopt == 'y');
     TEST("unknown option stick", getopt(argc, argv, ":abc") == '?');
-    TEST("optopt stick", optopt == 'y');
+}
+
+static void
+test5(void)
+{
+    char *argv[] = {
+        "test5",
+        "-acb",
+        "-c",
+        0
+    };
+    int argc = ARGC(argv);
+
+    optind = 0;
+    TEST("a", getopt(argc, argv, "ab") == 'a');
+    TEST("unknown option", getopt(argc, argv, "ab") == '?');
+    TEST("b", getopt(argc, argv, "ab") == 'b');
+    TEST("unknown option", getopt(argc, argv, "ab") == '?');
+    optind = 2;
+    TEST("missing argument", getopt(argc, argv, ":abc:") == ':');
+    TEST("stop", getopt(argc, argv, "ab") == -1);
 }
 
 int
@@ -126,6 +146,7 @@ main(void)
     test2();
     test3();
     test4();
+    test5();
     printf("%d fail, %d pass\n", count_fail, count_pass);
     return count_fail != 0;
 }
