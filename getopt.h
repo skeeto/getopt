@@ -44,6 +44,10 @@ getopt(int argc, char * const argv[], const char *optstring)
         if (!opt) {
             if (opterr && *optstring != ':')
                 fprintf(stderr, "%s: illegal option: %c\n", argv[0], optopt);
+            if (!arg[++optpos]) {
+                optind++;
+                optpos = 1;
+            }
             return '?';
         } else if (opt[1] == ':') {
             if (arg[optpos + 1]) {
@@ -61,6 +65,10 @@ getopt(int argc, char * const argv[], const char *optstring)
                     fprintf(stderr, 
                             "%s: option requires an argument: %c\n", 
                             argv[0], optopt);
+            if (!arg[++optpos]) {
+                optind++;
+                optpos = 1;
+            }
                 return *optstring == ':' ? ':' : '?';
             }
         } else {
