@@ -33,7 +33,7 @@ getopt(int argc, char * const argv[], const char *optstring)
     }
 
     arg = argv[optind];
-    if (arg && strcmp(arg, "--") == 0) {
+    if (arg && arg[0] == '-' && arg[1] == '-' && arg[2] == '\0') {
         optind++;
         return -1;
     } else if (!arg || arg[0] != '-' || !isalnum(arg[1])) {
